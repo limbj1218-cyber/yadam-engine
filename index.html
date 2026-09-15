@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>사용 가이드 — YADAM ENGINE</title>
+<title>사용 가이드 — (비공식) 후파의 야담플로우</title>
 <style>
   :root{
     --bg:#faf9f6; --card:#fff; --ink:#1a1816; --muted:#7a746c;
@@ -87,6 +87,12 @@
   .setting-table td{padding:8px 12px;border:1px solid var(--line)}
 
   a{color:var(--brand)}
+  .dl{display:inline-block;background:var(--brand);color:#fff !important;text-decoration:none;
+    padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px}
+  .dl:hover{opacity:.9}
+  .dl-outline{display:inline-block;border:2px solid var(--brand);color:var(--brand) !important;
+    text-decoration:none;padding:10px 20px;border-radius:10px;font-weight:700;font-size:15px}
+  .dl-outline:hover{background:var(--brand-soft)}
 
   footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
     color:var(--muted);font-size:13px;text-align:center}
@@ -104,7 +110,7 @@
 <header>
   <img src="images/05_app_icon.png" alt="YADAM ENGINE">
   <div class="header-text">
-    <h1>YADAM ENGINE</h1>
+    <h1>(비공식) 후파의 야담플로우</h1>
     <p>사용 가이드 · 엑셀 시나리오 기반 AI 이미지 자동화 도구</p>
     <span class="ver">CORE CONSOLE V1.5</span>
   </div>
@@ -112,7 +118,8 @@
 
 <nav class="toc">
   <h3>목차</h3>
-  <ol>
+  <ol start="0">
+    <li><a href="#step0">사전 준비 — 야담 이미지 스킬 & 야담플로우</a></li>
     <li><a href="#step1">초기 화면 — 이미지 스튜디오</a></li>
     <li><a href="#step2">엑셀 시나리오 업로드</a></li>
     <li><a href="#step3">턴어라운드 시트 생성</a></li>
@@ -120,6 +127,40 @@
     <li><a href="#step5">이미지 스튜디오 일괄 생성</a></li>
   </ol>
 </nav>
+
+<!-- ───────────────────────────── STEP 0 ───────────────────────────── -->
+<h2 id="step0">0. 사전 준비 — 야담 이미지 스킬 & 야담플로우</h2>
+
+<p>
+  YADAM ENGINE을 사용하기 전에 <strong>엑셀 시나리오 파일</strong>(<code class="inline">.xlsx</code>)과
+  <strong>캐릭터 프롬프트 파일</strong>(<code class="inline">.txt</code>)을 먼저 준비해야 합니다.
+  이 파일들은 <strong>야담 이미지 스킬</strong>을 통해 자동으로 생성할 수 있습니다.
+</p>
+
+<h3>야담 이미지 스킬 설치</h3>
+
+<p>아래 파일을 내려받아 Claude Code에 스킬로 등록하세요.</p>
+
+<div style="margin:16px 0">
+  <a class="dl" href="yadam-image-skill.zip" download>야담 이미지 스킬 내려받기 (.zip)</a>
+</div>
+
+<h3>야담플로우 접속</h3>
+
+<p>
+  스킬 설치 후, <strong>야담플로우</strong>에 접속하여 시나리오 데이터를 입력하면
+  엑셀 파일과 텍스트 파일이 자동으로 생성됩니다.
+</p>
+
+<div style="margin:16px 0">
+  <a class="dl-outline" href="https://flow.google.com/shared/tool/f3d76db3-ce15-4fad-8e9b-c99450440720" target="_blank" rel="noopener">야담플로우 바로가기 &rarr;</a>
+</div>
+
+<div class="warn">
+  <strong>필수:</strong> 야담플로우에서 생성한 엑셀 파일과 텍스트 파일이 없으면
+  YADAM ENGINE의 이미지 생성 기능을 사용할 수 없습니다.
+  반드시 이 단계를 먼저 완료해 주세요.
+</div>
 
 <!-- ───────────────────────────── STEP 1 ───────────────────────────── -->
 <h2 id="step1">1. 초기 화면 — 이미지 스튜디오</h2>
@@ -262,7 +303,7 @@
 <h2>전체 워크플로우</h2>
 
 <div class="flow">
-  <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YADAM ENGINE 전체 워크플로우">
+  <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YADAM ENGINE 전체 워크플로우">
     <style>
       .f-box{fill:var(--card);stroke:var(--line);stroke-width:1.5}
       .f-box-active{fill:var(--brand-soft);stroke:var(--brand);stroke-width:2}
@@ -278,48 +319,55 @@
     </defs>
 
     <rect x="150" y="10" width="300" height="50" rx="12" class="f-box-active"/>
-    <text x="300" y="30" class="f-text" font-weight="700">엑셀 시나리오 업로드</text>
-    <text x="300" y="48" class="f-sub">.xlsx 파일 업로드</text>
-    <text x="130" y="36" class="f-num">①</text>
+    <text x="300" y="30" class="f-text" font-weight="700">야담 이미지 스킬 + 야담플로우</text>
+    <text x="300" y="48" class="f-sub">엑셀 &amp; TXT 파일 생성</text>
+    <text x="130" y="36" class="f-num">⓪</text>
 
     <line x1="300" y1="60" x2="300" y2="90" class="f-arrow"/>
 
-    <rect x="150" y="90" width="300" height="50" rx="12" class="f-box"/>
-    <text x="300" y="110" class="f-text" font-weight="700">턴어라운드 시트 생성기 탭</text>
-    <text x="300" y="128" class="f-sub">자동 활성화</text>
+    <rect x="150" y="90" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="110" class="f-text" font-weight="700">엑셀 시나리오 업로드</text>
+    <text x="300" y="128" class="f-sub">.xlsx 파일 업로드</text>
+    <text x="130" y="116" class="f-num">①</text>
 
     <line x1="300" y1="140" x2="300" y2="170" class="f-arrow"/>
 
-    <rect x="150" y="170" width="300" height="50" rx="12" class="f-box-active"/>
-    <text x="300" y="190" class="f-text" font-weight="700">프롬프트 TXT 업로드</text>
-    <text x="300" y="208" class="f-sub">캐릭터별 프롬프트 파일</text>
-    <text x="130" y="196" class="f-num">②</text>
+    <rect x="150" y="170" width="300" height="50" rx="12" class="f-box"/>
+    <text x="300" y="190" class="f-text" font-weight="700">턴어라운드 시트 생성기 탭</text>
+    <text x="300" y="208" class="f-sub">자동 활성화</text>
 
     <line x1="300" y1="220" x2="300" y2="250" class="f-arrow"/>
 
-    <rect x="150" y="250" width="300" height="50" rx="12" class="f-box"/>
-    <text x="300" y="270" class="f-text" font-weight="700">턴어라운드 이미지 자동 생성</text>
-    <text x="300" y="288" class="f-sub">다각도 캐릭터 레퍼런스</text>
+    <rect x="150" y="250" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="270" class="f-text" font-weight="700">프롬프트 TXT 업로드</text>
+    <text x="300" y="288" class="f-sub">캐릭터별 프롬프트 파일</text>
+    <text x="130" y="276" class="f-num">②</text>
 
     <line x1="300" y1="300" x2="300" y2="330" class="f-arrow"/>
 
     <rect x="150" y="330" width="300" height="50" rx="12" class="f-box"/>
-    <text x="300" y="350" class="f-text" font-weight="700">이미지 스튜디오로 자동 전달</text>
-    <text x="300" y="368" class="f-sub">캐릭터 라이브러리에 등록</text>
+    <text x="300" y="350" class="f-text" font-weight="700">턴어라운드 이미지 자동 생성</text>
+    <text x="300" y="368" class="f-sub">다각도 캐릭터 레퍼런스</text>
 
     <line x1="300" y1="380" x2="300" y2="410" class="f-arrow"/>
 
-    <rect x="150" y="410" width="300" height="50" rx="12" class="f-box-active"/>
-    <text x="300" y="430" class="f-text" font-weight="700">SMART SYNC 실행</text>
-    <text x="300" y="448" class="f-sub">캐릭터 매칭 적용</text>
-    <text x="130" y="436" class="f-num">③</text>
+    <rect x="150" y="410" width="300" height="50" rx="12" class="f-box"/>
+    <text x="300" y="430" class="f-text" font-weight="700">이미지 스튜디오로 자동 전달</text>
+    <text x="300" y="448" class="f-sub">캐릭터 라이브러리에 등록</text>
 
     <line x1="300" y1="460" x2="300" y2="490" class="f-arrow"/>
 
     <rect x="150" y="490" width="300" height="50" rx="12" class="f-box-active"/>
-    <text x="300" y="504" class="f-text" font-weight="700">일괄 생성</text>
-    <text x="300" y="524" class="f-sub">야담용 이미지 완성</text>
-    <text x="130" y="516" class="f-num">④</text>
+    <text x="300" y="510" class="f-text" font-weight="700">SMART SYNC 실행</text>
+    <text x="300" y="528" class="f-sub">캐릭터 매칭 적용</text>
+    <text x="130" y="516" class="f-num">③</text>
+
+    <line x1="300" y1="540" x2="300" y2="560" class="f-arrow"/>
+
+    <rect x="150" y="560" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="580" class="f-text" font-weight="700">일괄 생성</text>
+    <text x="300" y="596" class="f-sub">야담용 이미지 완성</text>
+    <text x="130" y="586" class="f-num">④</text>
   </svg>
 </div>
 
