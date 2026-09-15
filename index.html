@@ -132,12 +132,49 @@
 <h2 id="step0">0. 사전 준비 — 야담 이미지 스킬 & 야담플로우</h2>
 
 <p>
-  YADAM ENGINE을 사용하기 전에 <strong>엑셀 시나리오 파일</strong>(<code class="inline">.xlsx</code>)과
-  <strong>캐릭터 프롬프트 파일</strong>(<code class="inline">.txt</code>)을 먼저 준비해야 합니다.
-  이 파일들은 <strong>야담 이미지 스킬</strong>을 통해 자동으로 생성할 수 있습니다.
+  YADAM ENGINE(야담플로우)을 사용하려면 <strong>이미지용 스토리보드 엑셀</strong>(<code class="inline">.xlsx</code>)과
+  <strong>캐릭터 턴어라운드 시트</strong>(<code class="inline">.txt</code>)가 필요합니다.
+  이 파일들은 <strong>야담 이미지 스킬</strong>을 사용하여 생성합니다.
 </p>
 
-<h3>야담 이미지 스킬 설치</h3>
+<h3>야담 이미지 스킬이란?</h3>
+
+<p>
+  Vrew 프로젝트 파일(<code class="inline">.vrew</code>)이나 스토리보드 엑셀을 입력하면,
+  조선시대 야담 이미지 생성에 필요한 산출물 세 가지를 자동으로 만들어주는 Claude Code 스킬입니다.
+</p>
+
+<table class="setting-table">
+  <tr><th>산출물</th><th>파일 형식</th><th>설명</th></tr>
+  <tr>
+    <td>스토리보드</td>
+    <td><code class="inline">_스토리보드.xlsx</code></td>
+    <td>Vrew 대본을 클립 단위로 정리한 기본 스토리보드</td>
+  </tr>
+  <tr>
+    <td><strong>이미지용 스토리보드</strong></td>
+    <td><code class="inline">_스토리보드_이미지용.xlsx</code></td>
+    <td>이미지 번호·등장인물·영문 프롬프트·켄번즈가 채워진 엑셀<br>
+      <span style="color:var(--brand);font-weight:700">&rarr; 야담플로우 엑셀 시나리오로 업로드</span></td>
+  </tr>
+  <tr>
+    <td><strong>캐릭터 턴어라운드 시트</strong></td>
+    <td><code class="inline">_캐릭터_턴어라운드시트.txt</code></td>
+    <td>캐릭터별 다각도 레퍼런스 생성용 영문 프롬프트 모음<br>
+      <span style="color:var(--brand);font-weight:700">&rarr; 야담플로우 턴어라운드 시트 생성기에서 업로드</span></td>
+  </tr>
+</table>
+
+<h3>스킬의 작업 흐름</h3>
+
+<ol class="steps">
+  <li><code class="inline">.vrew</code> 파일을 주면 대본을 분석하여 인물·배경·의상을 파악합니다.</li>
+  <li>캐릭터별 턴어라운드 시트(<code class="inline">.txt</code>)를 작성합니다.</li>
+  <li>대본을 장면 단위로 나누고, 각 장면마다 영문 이미지 프롬프트를 생성합니다.</li>
+  <li>이미지용 스토리보드 엑셀(<code class="inline">.xlsx</code>)을 완성합니다.</li>
+</ol>
+
+<h3>스킬 내려받기</h3>
 
 <p>아래 파일을 내려받아 Claude Code에 스킬로 등록하세요.</p>
 
@@ -148,17 +185,22 @@
 <h3>야담플로우 접속</h3>
 
 <p>
-  스킬 설치 후, <strong>야담플로우</strong>에 접속하여 시나리오 데이터를 입력하면
-  엑셀 파일과 텍스트 파일이 자동으로 생성됩니다.
+  스킬로 생성한 파일을 <strong>야담플로우</strong>에 업로드하여 이미지를 생성합니다.
 </p>
 
 <div style="margin:16px 0">
   <a class="dl-outline" href="https://flow.google.com/shared/tool/f3d76db3-ce15-4fad-8e9b-c99450440720" target="_blank" rel="noopener">야담플로우 바로가기 &rarr;</a>
 </div>
 
+<div class="note">
+  <strong>파일 연결 요약</strong><br>
+  야담 이미지 스킬에서 생성된 <strong>이미지용 스토리보드 xlsx</strong> &rarr; 야담플로우 <strong>엑셀 시나리오 업로드</strong> (2단계)<br>
+  야담 이미지 스킬에서 생성된 <strong>캐릭터 턴어라운드 시트 txt</strong> &rarr; 야담플로우 <strong>프롬프트 TXT 업로드</strong> (3단계)
+</div>
+
 <div class="warn">
-  <strong>필수:</strong> 야담 이미지 스킬을 사용해서 생성한 엑셀 파일과 텍스트 파일이 없으면
-  YADAM ENGINE의 이미지 생성 기능을 사용할 수 없습니다.
+  <strong>필수:</strong> 야담 이미지 스킬을 사용해서 생성한 이미지용 스토리보드 엑셀과
+  캐릭터 턴어라운드 시트 텍스트 파일이 없으면 YADAM ENGINE의 이미지 생성 기능을 사용할 수 없습니다.
   반드시 이 단계를 먼저 완료해 주세요.
 </div>
 
