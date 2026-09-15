@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사용 가이드 — YADAM ENGINE</title>
+<style>
+  :root{
+    --bg:#faf9f6; --card:#fff; --ink:#1a1816; --muted:#7a746c;
+    --line:#e5dfd6; --brand:#d4a017; --brand-soft:#fdf6e3;
+    --warn-bg:#fff7ed; --warn-line:#fdba74; --warn-ink:#9a3412;
+    --code-bg:#1c1a17; --code-ink:#f0ead8;
+    --step:#b8860b;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121110; --card:#1d1b18; --ink:#ede9e0; --muted:#a09889;
+      --line:#302c26; --brand:#e8b82a; --brand-soft:#2a2518;
+      --warn-bg:#2b1d10; --warn-line:#a1560f; --warn-ink:#fcd9a8;
+      --code-bg:#0e0d0b; --code-ink:#f0ead8;
+      --step:#e8b82a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121110; --card:#1d1b18; --ink:#ede9e0; --muted:#a09889;
+    --line:#302c26; --brand:#e8b82a; --brand-soft:#2a2518;
+    --warn-bg:#2b1d10; --warn-line:#a1560f; --warn-ink:#fcd9a8;
+    --code-bg:#0e0d0b; --code-ink:#f0ead8;
+    --step:#e8b82a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;
+    line-height:1.75;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:32px 20px 80px}
+
+  header{
+    background:linear-gradient(135deg,#c99a10,#8b6914);
+    color:#fff;border-radius:16px;padding:34px 28px;margin-bottom:28px;
+    display:flex;align-items:center;gap:22px;
+  }
+  header img{width:72px;height:72px;border-radius:14px;flex-shrink:0;
+    box-shadow:0 2px 12px rgba(0,0,0,.3)}
+  .header-text h1{margin:0 0 6px;font-size:26px;letter-spacing:-.3px}
+  .header-text p{margin:0;opacity:.92;font-size:15px}
+  .ver{display:inline-block;margin-top:10px;background:rgba(255,255,255,.2);
+    padding:3px 12px;border-radius:999px;font-size:13px;font-weight:600}
+
+  h2{font-size:20px;margin:40px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  h2:first-of-type{border-top:0;padding-top:0;margin-top:8px}
+  h3{font-size:16px;margin:24px 0 8px}
+  p,li{font-size:15px}
+  ol{padding-left:22px} ol li{margin:10px 0}
+  .steps li::marker{color:var(--step);font-weight:700}
+
+  .note{background:var(--brand-soft);border-left:4px solid var(--brand);
+    border-radius:10px;padding:14px 18px;margin:18px 0;font-size:14.5px}
+  .warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink);
+    border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14.5px}
+  .tip{background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14.5px}
+
+  code.inline{background:var(--brand-soft);padding:2px 7px;border-radius:5px;
+    font-size:13.5px;font-family:ui-monospace,Consolas,monospace}
+
+  .figure{margin:20px 0 8px;border:1px solid var(--line);border-radius:14px;
+    background:var(--card);padding:4px;overflow:hidden}
+  .figure img{display:block;width:100%;height:auto;border-radius:10px}
+  .figure-cap{margin-top:8px;margin-bottom:6px;font-size:13.5px;color:var(--muted);text-align:center}
+
+  .flow{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:24px 20px;margin:20px 0;overflow-x:auto}
+  .flow svg{display:block;margin:0 auto;max-width:100%;height:auto}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 22px;margin:0 0 28px}
+  .toc h3{margin:0 0 10px;font-size:15px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.8px;font-weight:700}
+  .toc ol{margin:0;padding-left:20px}
+  .toc li{margin:4px 0;font-size:15px}
+  .toc a{color:var(--brand);text-decoration:none;font-weight:600}
+  .toc a:hover{text-decoration:underline}
+
+  .setting-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  .setting-table th{text-align:left;padding:8px 12px;background:var(--brand-soft);
+    border:1px solid var(--line);font-weight:700;white-space:nowrap}
+  .setting-table td{padding:8px 12px;border:1px solid var(--line)}
+
+  a{color:var(--brand)}
+
+  footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:13px;text-align:center}
+  footer img{width:40px;height:40px;border-radius:8px;vertical-align:middle;margin-right:8px}
+
+  @media (max-width:600px){
+    header{flex-direction:column;text-align:center}
+    .header-text h1{font-size:22px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img src="images/05_app_icon.png" alt="YADAM ENGINE">
+  <div class="header-text">
+    <h1>YADAM ENGINE</h1>
+    <p>사용 가이드 · 엑셀 시나리오 기반 AI 이미지 자동화 도구</p>
+    <span class="ver">CORE CONSOLE V1.5</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h3>목차</h3>
+  <ol>
+    <li><a href="#step1">초기 화면 — 이미지 스튜디오</a></li>
+    <li><a href="#step2">엑셀 시나리오 업로드</a></li>
+    <li><a href="#step3">턴어라운드 시트 생성</a></li>
+    <li><a href="#step4">스마트 싱크 — 캐릭터 매칭</a></li>
+    <li><a href="#step5">이미지 스튜디오 일괄 생성</a></li>
+  </ol>
+</nav>
+
+<!-- ───────────────────────────── STEP 1 ───────────────────────────── -->
+<h2 id="step1">1. 초기 화면 — 이미지 스튜디오</h2>
+
+<p>
+  프로그램을 실행하면 <strong>이미지 스튜디오</strong> 탭이 기본으로 표시됩니다.
+  좌측 패널에서 데이터를 입력하고 생성 옵션을 설정합니다.
+</p>
+
+<div class="figure">
+  <img src="images/01_initial_screen.png" alt="YADAM ENGINE 초기 화면">
+</div>
+
+<table class="setting-table">
+  <tr><th>영역</th><th>설명</th></tr>
+  <tr><td>엑셀 시나리오 업로드</td><td>시나리오가 담긴 <code class="inline">.xlsx</code> 파일을 업로드합니다</td></tr>
+  <tr><td>기존 작업 동기화</td><td>이전에 작업하던 프로젝트를 불러옵니다</td></tr>
+  <tr><td>AI 모델</td><td>이미지 생성에 사용할 AI 모델을 선택합니다 (예: Nano Banana 2)</td></tr>
+  <tr><td>이미지 비율</td><td>생성될 이미지의 비율을 설정합니다 (16:9, 1:1 등)</td></tr>
+  <tr><td>동시 생성</td><td>한 번에 동시에 생성할 이미지 수</td></tr>
+  <tr><td>생성 간격</td><td>이미지 생성 사이의 대기 시간 (초)</td></tr>
+  <tr><td>자동 개별 다운로드</td><td>생성 완료 시 자동으로 개별 파일로 저장 (토글 ON/OFF)</td></tr>
+</table>
+
+<div class="note">
+  하단의 <strong>캐릭터 영문 라이브러리</strong>와 <strong>SMART SYNC</strong> 버튼은
+  시나리오 업로드 후 캐릭터 매칭에 사용됩니다. 4단계에서 자세히 설명합니다.
+</div>
+
+<!-- ───────────────────────────── STEP 2 ───────────────────────────── -->
+<h2 id="step2">2. 엑셀 시나리오 업로드</h2>
+
+<p>
+  <strong>엑셀 시나리오 업로드</strong> 버튼을 클릭하여 준비된 <code class="inline">.xlsx</code>
+  파일을 업로드합니다.
+</p>
+
+<div class="figure">
+  <img src="images/02_turnaround_tab.png" alt="엑셀 업로드 후 턴어라운드 탭 생성">
+</div>
+
+<p>업로드가 완료되면 두 가지 변화가 생깁니다:</p>
+
+<ol class="steps">
+  <li>상단에 <strong>턴어라운드 시트 생성기</strong> 탭이 자동으로 추가됩니다.</li>
+  <li>메인 영역에 <strong>작업 대기열</strong>이 표시되며, 영문 매칭 및 스마트 싱크가 적용된 시나리오 목록을 확인할 수 있습니다.</li>
+</ol>
+
+<div class="note">
+  <strong>다음 단계:</strong> 새로 생긴 <strong>턴어라운드 시트 생성기</strong> 탭을 클릭하여
+  캐릭터 턴어라운드 이미지를 먼저 생성합니다.
+</div>
+
+<!-- ───────────────────────────── STEP 3 ───────────────────────────── -->
+<h2 id="step3">3. 턴어라운드 시트 생성</h2>
+
+<p>
+  <strong>턴어라운드 시트 생성기</strong> 탭으로 이동하여 캐릭터별 다각도 레퍼런스 이미지를 생성합니다.
+</p>
+
+<ol class="steps">
+  <li><strong>프롬프트 TXT 업로드</strong> 버튼을 클릭하여 캐릭터별 프롬프트가 담긴 <code class="inline">.txt</code> 파일을 업로드합니다.</li>
+  <li>좌측에서 AI 모델, 이미지 비율, 동시 생성 수, 생성 간격을 설정합니다.</li>
+  <li>하단의 <strong>일괄 생성 시작</strong> 버튼을 클릭합니다.</li>
+</ol>
+
+<div class="figure">
+  <img src="images/03_turnaround_result.png" alt="턴어라운드 시트 생성 결과">
+</div>
+
+<h3>생성 결과 확인</h3>
+
+<ul>
+  <li>각 캐릭터별로 다양한 각도의 턴어라운드 이미지가 자동 생성됩니다.</li>
+  <li>카드에는 캐릭터 이름, 나이, 의상 정보와 프롬프트가 표시됩니다.</li>
+  <li>하단 로그에서 생성 진행 상황을 실시간으로 확인할 수 있습니다.</li>
+  <li>각 카드의 <strong>다시 생성</strong> 버튼으로 개별 재생성이 가능합니다.</li>
+</ul>
+
+<div class="note">
+  생성이 완료된 턴어라운드 이미지는 <strong>자동으로 이미지 스튜디오의 캐릭터 라이브러리에 등록</strong>됩니다.
+  별도의 수동 작업이 필요하지 않습니다.
+</div>
+
+<!-- ───────────────────────────── STEP 4 ───────────────────────────── -->
+<h2 id="step4">4. 스마트 싱크 — 캐릭터 매칭</h2>
+
+<p>
+  다시 <strong>이미지 스튜디오</strong> 탭으로 돌아와 캐릭터 라이브러리를 확인합니다.
+</p>
+
+<div class="figure">
+  <img src="images/04_smart_sync.png" alt="스마트 싱크 화면">
+</div>
+
+<h3>캐릭터 영문 라이브러리 상태</h3>
+
+<p>시나리오에 등장하는 캐릭터가 목록으로 표시되며, 각 캐릭터의 매칭 상태를 확인할 수 있습니다:</p>
+
+<table class="setting-table">
+  <tr><th>상태</th><th>의미</th></tr>
+  <tr><td><span style="color:#e65100;font-weight:700">MISSING</span></td><td>영문 프롬프트가 아직 매칭되지 않았습니다</td></tr>
+  <tr><td><strong>FOUND IN TURNAROUND</strong></td><td>턴어라운드 시트에서 캐릭터가 자동 발견되었습니다</td></tr>
+</table>
+
+<p>
+  <strong>직접 영입하기</strong> 버튼으로 캐릭터를 수동 추가할 수도 있습니다.
+</p>
+
+<div class="warn">
+  <strong>중요:</strong> 반드시 <strong>SMART SYNC</strong> 버튼을 클릭해야 캐릭터 라이브러리의 영문 프롬프트가
+  이미지 생성 시 실제로 적용됩니다.<br>
+  싱크하지 않으면 캐릭터 정보 없이 이미지가 생성됩니다.
+</div>
+
+<!-- ───────────────────────────── STEP 5 ───────────────────────────── -->
+<h2 id="step5">5. 이미지 스튜디오 일괄 생성</h2>
+
+<p>스마트 싱크 완료 후, 이미지 스튜디오에서 최종 야담용 이미지를 생성합니다.</p>
+
+<h3>생성 전 확인사항</h3>
+
+<div class="tip">
+  <label><input type="checkbox"> 엑셀 시나리오가 업로드되어 작업 대기열에 표시되는지 확인</label><br>
+  <label><input type="checkbox"> 턴어라운드 이미지가 생성되었는지 확인</label><br>
+  <label><input type="checkbox"> SMART SYNC를 실행하여 캐릭터 매칭이 적용되었는지 확인</label><br>
+  <label><input type="checkbox"> AI 모델, 이미지 비율 등 생성 설정이 원하는 값인지 확인</label>
+</div>
+
+<p>
+  모든 준비가 되었다면, 하단의 <strong>일괄 생성</strong> 버튼을 클릭하세요.
+  작업 대기열의 시나리오가 순차적으로 처리되며, 각 장면에 맞는 야담용 이미지가 자동 생성됩니다.
+</p>
+
+<div class="note">
+  <strong>압축 다운로드</strong> 버튼으로 생성된 전체 이미지를 ZIP 파일로 일괄 다운로드할 수 있습니다.
+</div>
+
+<!-- ───────────────────────────── FLOW ───────────────────────────── -->
+<h2>전체 워크플로우</h2>
+
+<div class="flow">
+  <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YADAM ENGINE 전체 워크플로우">
+    <style>
+      .f-box{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+      .f-box-active{fill:var(--brand-soft);stroke:var(--brand);stroke-width:2}
+      .f-text{fill:var(--ink);font-size:14px;font-family:inherit;text-anchor:middle;dominant-baseline:central}
+      .f-sub{fill:var(--muted);font-size:11.5px;font-family:inherit;text-anchor:middle;dominant-baseline:central}
+      .f-arrow{fill:none;stroke:var(--brand);stroke-width:2;marker-end:url(#fa)}
+      .f-num{fill:var(--brand);font-size:12px;font-weight:700;font-family:inherit}
+    </style>
+    <defs>
+      <marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--brand)"/>
+      </marker>
+    </defs>
+
+    <rect x="150" y="10" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="30" class="f-text" font-weight="700">엑셀 시나리오 업로드</text>
+    <text x="300" y="48" class="f-sub">.xlsx 파일 업로드</text>
+    <text x="130" y="36" class="f-num">①</text>
+
+    <line x1="300" y1="60" x2="300" y2="90" class="f-arrow"/>
+
+    <rect x="150" y="90" width="300" height="50" rx="12" class="f-box"/>
+    <text x="300" y="110" class="f-text" font-weight="700">턴어라운드 시트 생성기 탭</text>
+    <text x="300" y="128" class="f-sub">자동 활성화</text>
+
+    <line x1="300" y1="140" x2="300" y2="170" class="f-arrow"/>
+
+    <rect x="150" y="170" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="190" class="f-text" font-weight="700">프롬프트 TXT 업로드</text>
+    <text x="300" y="208" class="f-sub">캐릭터별 프롬프트 파일</text>
+    <text x="130" y="196" class="f-num">②</text>
+
+    <line x1="300" y1="220" x2="300" y2="250" class="f-arrow"/>
+
+    <rect x="150" y="250" width="300" height="50" rx="12" class="f-box"/>
+    <text x="300" y="270" class="f-text" font-weight="700">턴어라운드 이미지 자동 생성</text>
+    <text x="300" y="288" class="f-sub">다각도 캐릭터 레퍼런스</text>
+
+    <line x1="300" y1="300" x2="300" y2="330" class="f-arrow"/>
+
+    <rect x="150" y="330" width="300" height="50" rx="12" class="f-box"/>
+    <text x="300" y="350" class="f-text" font-weight="700">이미지 스튜디오로 자동 전달</text>
+    <text x="300" y="368" class="f-sub">캐릭터 라이브러리에 등록</text>
+
+    <line x1="300" y1="380" x2="300" y2="410" class="f-arrow"/>
+
+    <rect x="150" y="410" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="430" class="f-text" font-weight="700">SMART SYNC 실행</text>
+    <text x="300" y="448" class="f-sub">캐릭터 매칭 적용</text>
+    <text x="130" y="436" class="f-num">③</text>
+
+    <line x1="300" y1="460" x2="300" y2="490" class="f-arrow"/>
+
+    <rect x="150" y="490" width="300" height="50" rx="12" class="f-box-active"/>
+    <text x="300" y="504" class="f-text" font-weight="700">일괄 생성</text>
+    <text x="300" y="524" class="f-sub">야담용 이미지 완성</text>
+    <text x="130" y="516" class="f-num">④</text>
+  </svg>
+</div>
+
+<footer>
+  <img src="images/05_app_icon.png" alt="YADAM ENGINE">
+  YADAM ENGINE &copy; 2026 — CORE CONSOLE V1.5
+</footer>
+
+</div>
+</body>
+</html>
